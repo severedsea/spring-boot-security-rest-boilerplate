@@ -2,6 +2,7 @@
 ###### Note: Sole purpose of this project is for personal use. But feel free to comment and use this as a reference for your own project. 
 ### Features: 
 - Spring Boot
+	* Auto Configuration
 - Spring Security
 	* Custom token-based authentication filter
 	* Database token storage
@@ -16,6 +17,7 @@
 	* JPA
 	* Hibernate
 	* MySQL 
+- Pure Java Configuration
 - Groovy
 - Gradle
 - Flyway Database Migration
