@@ -1,4 +1,4 @@
-package com.swagalls.auth
+package com.app.auth
 
 import groovy.transform.CompileStatic
 import org.springframework.http.HttpHeaders

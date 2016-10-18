@@ -1,6 +1,6 @@
-package com.swagalls.core.security
+package com.app.core.security
 
-import com.swagalls.user.User
+import com.app.user.User
 import groovy.transform.CompileStatic
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

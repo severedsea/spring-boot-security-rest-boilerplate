@@ -1,13 +1,13 @@
-package com.swagalls.core.security
+package com.app.core.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.swagalls.auth.SessionToken
-import com.swagalls.auth.SessionTokenRepository
-import com.swagalls.core.exception.CheckedException
-import com.swagalls.core.web.ErrorResponse
-import com.swagalls.core.web.MessageHelper
-import com.swagalls.user.User
-import com.swagalls.user.UserRepository
+import com.app.auth.SessionToken
+import com.app.auth.SessionTokenRepository
+import com.app.core.exception.CheckedException
+import com.app.core.web.ErrorResponse
+import com.app.core.web.MessageHelper
+import com.app.user.User
+import com.app.user.UserRepository
 import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager

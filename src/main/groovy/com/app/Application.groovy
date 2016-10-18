@@ -1,4 +1,4 @@
-package com.swagalls
+package com.app
 
 import groovy.transform.CompileStatic
 import org.springframework.boot.SpringApplication

@@ -1,4 +1,4 @@
-package com.swagalls.user
+package com.app.user
 
 import com.fasterxml.jackson.annotation.JsonView
 import groovy.transform.CompileStatic

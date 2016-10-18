@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/swagalls
+    url: jdbc:mysql://localhost/maindb
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver

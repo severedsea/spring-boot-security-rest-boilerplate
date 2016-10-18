@@ -1,4 +1,4 @@
-package com.swagalls.core.exception
+package com.app.core.exception
 
 import groovy.transform.CompileStatic
 

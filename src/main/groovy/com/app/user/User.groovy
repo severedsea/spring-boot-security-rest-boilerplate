@@ -1,7 +1,7 @@
-package com.swagalls.user
+package com.app.user
 
 import com.fasterxml.jackson.annotation.JsonView
-import com.swagalls.core.entity.DomainEntity
+import com.app.core.entity.DomainEntity
 import groovy.transform.CompileStatic
 
 import javax.persistence.*

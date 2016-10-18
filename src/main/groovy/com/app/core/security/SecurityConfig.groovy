@@ -1,4 +1,4 @@
-package com.swagalls.core.security
+package com.app.core.security
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode

@@ -1,7 +1,7 @@
-package com.swagalls.core.security
+package com.app.core.security
 
-import com.swagalls.user.User
-import com.swagalls.user.UserRepository
+import com.app.user.User
+import com.app.user.UserRepository
 import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails

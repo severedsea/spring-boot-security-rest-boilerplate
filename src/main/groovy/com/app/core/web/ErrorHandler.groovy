@@ -1,6 +1,6 @@
-package com.swagalls.core.web
+package com.app.core.web
 
-import com.swagalls.core.exception.CheckedException
+import com.app.core.exception.CheckedException
 import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.i18n.LocaleContextHolder
@@ -39,7 +39,7 @@ class ErrorHandler {
     }
 
     /**
-     * Handle {@link javax.validation.Valid} {@link com.swagalls.core.entity.AbstractEntity} validation exceptions
+     * Handle {@link javax.validation.Valid} {@link com.app.core.entity.AbstractEntity} validation exceptions
      *
      * @param e - MethodArgumentNotValidException
      * @return ErrorResponse

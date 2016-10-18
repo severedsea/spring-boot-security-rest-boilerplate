@@ -1,4 +1,4 @@
-package com.swagalls.core.web
+package com.app.core.web
 
 import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired

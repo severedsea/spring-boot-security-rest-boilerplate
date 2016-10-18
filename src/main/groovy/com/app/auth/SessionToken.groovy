@@ -1,8 +1,8 @@
-package com.swagalls.auth
+package com.app.auth
 
 import com.fasterxml.jackson.annotation.JsonView
-import com.swagalls.core.entity.AbstractEntity
-import com.swagalls.user.User
+import com.app.core.entity.AbstractEntity
+import com.app.user.User
 import groovy.transform.CompileStatic
 
 import javax.persistence.Entity

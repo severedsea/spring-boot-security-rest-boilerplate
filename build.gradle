@@ -15,7 +15,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-	baseName = 'spring-boot-security'
+	baseName = 'spring-boot-security-rest'
 	version = ''
 }
 sourceCompatibility = 1.8

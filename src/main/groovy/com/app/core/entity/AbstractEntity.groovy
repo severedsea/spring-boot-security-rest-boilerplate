@@ -1,4 +1,4 @@
-package com.swagalls.core.entity
+package com.app.core.entity
 
 import groovy.transform.CompileStatic
 

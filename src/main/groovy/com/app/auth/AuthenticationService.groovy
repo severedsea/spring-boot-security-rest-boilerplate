@@ -1,8 +1,8 @@
-package com.swagalls.auth
+package com.app.auth
 
-import com.swagalls.core.exception.CheckedException
-import com.swagalls.core.security.CustomUserDetails
-import com.swagalls.user.User
+import com.app.core.exception.CheckedException
+import com.app.core.security.CustomUserDetails
+import com.app.user.User
 import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager

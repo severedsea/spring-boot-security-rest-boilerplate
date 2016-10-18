@@ -1,4 +1,4 @@
-package com.swagalls.user
+package com.app.user
 
 import groovy.transform.CompileStatic
 import org.springframework.data.repository.CrudRepository

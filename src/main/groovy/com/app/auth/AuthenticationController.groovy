@@ -1,4 +1,4 @@
-package com.swagalls.auth
+package com.app.auth
 
 import com.fasterxml.jackson.annotation.JsonView
 import groovy.transform.CompileStatic
