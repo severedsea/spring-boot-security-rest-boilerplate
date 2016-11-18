@@ -3,7 +3,7 @@ package com.app.core.security
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.context.embedded.FilterRegistrationBean
+import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
@@ -60,8 +60,9 @@ class SecurityConfig extends WebSecurityConfigurerAdapter  {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
+        .antMatchers(HttpMethod.OPTIONS, "/**/*")
         .antMatchers("favicon.ico")
-        .antMatchers("/auth/login")
+        .antMatchers("/auth/login/**")
         .antMatchers("/auth/logout")
         .antMatchers(HttpMethod.POST, "/user/create")
     }
