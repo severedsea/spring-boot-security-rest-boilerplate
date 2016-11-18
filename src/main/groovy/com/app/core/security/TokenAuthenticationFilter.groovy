@@ -1,6 +1,5 @@
 package com.app.core.security
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.app.auth.SessionToken
 import com.app.auth.SessionTokenRepository
 import com.app.core.exception.CheckedException
@@ -8,8 +7,10 @@ import com.app.core.web.ErrorResponse
 import com.app.core.web.MessageHelper
 import com.app.user.User
 import com.app.user.UserRepository
+import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.AuthenticationServiceException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -24,8 +25,6 @@ import org.springframework.stereotype.Component
 
 import javax.servlet.FilterChain
 import javax.servlet.ServletException
-import javax.servlet.ServletRequest
-import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -53,6 +52,31 @@ class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     TokenAuthenticationFilter() {
         super("/**")
+
+        // Provide empty AuthenticationSuccessHandler.onAuthenticationSuccess implementation
+        setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
+            @Override
+            void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+                // Do nothing
+            }
+        })
+
+        // Implements AuthenticationFailureHandler.onAuthenticationFailure
+        setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler() {
+            @Override
+            void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
+                // Handle CORS since it's not being handled by the CorsFilter in {@link SecurityConfig}
+                response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+                response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "*")
+                response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "*")
+                response.setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600")
+
+                // Write 401 error response
+                response.setContentType("application/json")
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED)
+                new ObjectMapper().writeValue(response.getOutputStream(), new ErrorResponse(CheckedException.AUTHENTICATION_TOKEN.code, messageHelper.get(exception.message)))
+            }
+        })
     }
 
     @Override
@@ -82,27 +106,13 @@ class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        // Implements AuthenticationSuccessHandler.onAuthenticationSuccess
-        setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
-            @Override
-            void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-                // Override to continue with the filter chain since default handling is URL redirection
-                chain.doFilter(request, response)
-            }
-        })
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
+            throws IOException, ServletException {
+        super.successfulAuthentication(request, response, chain, authResult);
 
-        // Implements AuthenticationFailureHandler.onAuthenticationFailure
-        setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler() {
-            @Override
-            void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
-                response.setContentType("application/json")
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED)
-                new ObjectMapper().writeValue(response.getOutputStream(), new ErrorResponse(CheckedException.AUTHENTICATION_TOKEN.code, messageHelper.get(exception.message)))
-            }
-        })
-
-        super.doFilter(req, res, chain)
+        // As this authentication is in HTTP header, after success we need to continue the request normally
+        // and return the response as if the resource was not secured at all
+        chain.doFilter(request, response);
     }
 
     @Autowired
